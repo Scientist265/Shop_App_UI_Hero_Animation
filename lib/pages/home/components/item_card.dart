@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../components/constants.dart';
 import '../../../model/product.dart';
 
-
 class ItemCard extends StatelessWidget {
   const ItemCard({
     super.key,
@@ -20,13 +19,16 @@ class ItemCard extends StatelessWidget {
       children: [
         Expanded(
           child: GestureDetector(
-            onTap: press,            child: Container(
+            onTap: press,
+            child: Container(
               padding: const EdgeInsets.all(kDefaultPaddin),
               // height: 180,
               // width: 160,
               decoration: BoxDecoration(
-                  color: product!.color, borderRadius: BorderRadius.circular(16)),
-              child: Image.asset(product!.image),
+                  color: product!.color,
+                  borderRadius: BorderRadius.circular(16)),
+              child: Hero(
+                  tag: "${product!.id}", child: Image.asset(product!.image)),
             ),
           ),
         ),

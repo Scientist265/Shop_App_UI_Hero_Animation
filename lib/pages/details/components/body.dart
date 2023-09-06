@@ -2,6 +2,9 @@ import "package:flutter/material.dart";
 import "package:hero_animation_tutorial/components/constants.dart";
 
 import "../../../model/product.dart";
+import "add_to_cart.dart";
+import "color_and_size.dart";
+import "description.dart";
 import "product_tile_with_image.dart";
 
 class DetailBody extends StatelessWidget {
@@ -29,30 +32,10 @@ class DetailBody extends StatelessWidget {
                         topLeft: Radius.circular(24))),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Color"),
-                            Row(
-                              children: [
-                                ColorDot(
-                                  color: Color(0xFF356C95),
-                                  isSelected: true,
-                                ),
-                                ColorDot(color: Color(0xFFF8C078)),
-                                ColorDot(color: Color(0xFFA29B9B)),
-                              ],
-                            ),
-                          ],
-                        ),
-                        RichText(
-                            text: const TextSpan(
-                                style: TextStyle(color: kTextColor),
-                                children: [TextSpan(text: 'Size')]))
-                      ],
-                    )
+                    ColorAndSize(product: product),
+                    Description(product: product),
+                    const CounterWithFavButton(),
+                    AddToCart(product: product)
                   ],
                 ),
               ),
@@ -62,35 +45,5 @@ class DetailBody extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-class ColorDot extends StatelessWidget {
-  const ColorDot({
-    super.key,
-    required this.color,
-    this.isSelected = false,
-  });
-  final Color color;
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        height: 22,
-        width: 22,
-        margin: const EdgeInsets.only(
-            top: kDefaultPaddin / 4, right: kDefaultPaddin / 4),
-        padding: const EdgeInsets.all(2.5),
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: isSelected ? color : Colors.transparent,
-            ),
-            shape: BoxShape.circle),
-        child: DecoratedBox(
-            decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: color,
-        )));
   }
 }
